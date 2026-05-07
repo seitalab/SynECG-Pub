@@ -51,10 +51,10 @@
   "conformsTo": "http://mlcommons.org/croissant/1.0",
   "name": "SimECG-N",
   "description": "SimECG-N is a synthetic 1-D ECG corpus generated in this repository with a physiologically inspired simulator. The dataset contains only signal arrays (single-lead, 10-second windows) and no identifiable patient-derived metadata.",
-  "version": "TODO: add release tag",
+  "version": "1.0.0",
   "datePublished": "2026-05-07",
   "citeAs": "TODO: add bibtex citation",
-  "license": "TODO: add public data license",
+  "license": "CC 4.0",
   "url": "DATA_CARD_SimECG-N.md",
   "keywords": [
     "ECG",
