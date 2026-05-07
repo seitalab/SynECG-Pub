@@ -10,7 +10,6 @@ import numpy as np
 from tqdm import tqdm
 from torch.utils.data import Dataset, get_worker_info
 
-# root = "/home/nonaka/git/ecg_pj/SynthesizedECG/data"
 cfg_file = "../../config.yaml"
 with open(cfg_file, "r") as f:
     cfg = yaml.safe_load(f)

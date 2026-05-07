@@ -7,7 +7,6 @@ import torch
 import numpy as np
 from torch.utils.data import Dataset
 
-# root = "/home/nonaka/git/ecg_pj/SynthesizedECG/data"
 cfg_file = "../../config.yaml"
 with open(cfg_file, "r") as f:
     cfg = yaml.safe_load(f)
