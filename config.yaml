@@ -1,0 +1,694 @@
+
+experiment:
+  
+  dataset_dx:
+    ptbxl:
+      - af
+      - pvc
+      - pac
+      - irbbb
+      - crbbb
+      - std
+      - asmi
+      - imi
+    
+      - lvh
+      - lafb
+      - isc
+      - iavb
+      - abqrs
+
+    g12ec:
+      - af
+      - pvc
+
+      - lvh
+      - irbbb
+      - iavb
+      - pac
+      - rbbb
+
+    cpsc:
+      - af
+      - iavb
+      - pac
+      - pvc
+      - std
+      - rbbb
+
+  seed:
+    pretrain: 7
+    hps: 6
+    multirun:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    generate: 8
+
+  result_cols:
+    - score
+    - loss
+
+  path: 
+    save_root_gen: ../../outputs/experiment/v260501
+    save_root: ../../outputs/experiment/v260501
+
+    data_root: ../../raw_data/dataset
+    yaml_loc: ./resources/exp_yamls
+    dgm_yaml_loc: ./resources/dgm_yamls
+    gen_yaml_loc: ./resources/gen_yamls
+    pretrain_yaml_loc: ./resources/pretrain_yamls
+    mae_eval_yaml_loc: ./resources/mae_eval_yamls
+
+  ft_settings:
+
+    reuse_params:
+
+      mae:
+        - downsample
+        - max_duration
+        - freq
+        - emb_dim
+        - depth
+        - heads
+        - dec_emb_dim
+        - dec_depth
+        - dec_heads
+        - mlp_ratio
+        - chunk_len
+      resnet18:
+        - downsample
+        - max_duration
+        - freq
+        - backbone_out_dim
+      transformer:
+        - downsample
+        - max_duration
+        - freq
+        - backbone_out_dim
+        - depth
+        - heads
+        - ff_dim
+        - lin_chunk_len
+     
+
+    model_path:
+      # <architecture>-<prior_training>_<suffix>
+      mae: null
+
+  mae_settings:
+
+    reuse_params:
+      - downsample
+      - max_duration
+      - freq
+      - emb_dim
+      - depth
+      - heads
+      - dec_emb_dim
+      - dec_depth
+      - dec_heads
+      - mlp_ratio
+      - chunk_len
+
+    pt_model_path: 
+
+      pt1001: null
+
+      pt3001: null # Fill path for Generative model pretrained pt model.
+      pt3002: null
+
+pretrain_params:
+
+  mae:
+
+    search00: # for testing.
+      # n_updates: 500000 # 500k
+      total_samples: 1.0*1e5 # 100k
+      batch_size: 256
+      eval_every: 1.*1e4 #10k
+      learning_rate: 1.*1e-4
+
+    search01:
+      total_samples: 1.0*1e8 # 100M
+      batch_size: 256
+      eval_every: 1.*1e5 #100k
+      learning_rate: 1.*1e-4
+
+    eval00: # for testing
+      target_dx: af
+      pos_dataset: PTBXL-AFIB
+      neg_dataset: PTBXL-NORM
+      batch_size: 256
+      epochs: 5
+      learning_rate: 1.*1e-4
+      reuse_params:
+        - downsample
+        - max_duration
+        - freq
+        - emb_dim
+        - depth
+        - heads
+        - dec_emb_dim
+        - dec_depth
+        - dec_heads
+        - mlp_ratio
+        - chunk_len
+
+    eval01:
+      target_dx: af
+      pos_dataset: PTBXL-AFIB
+      neg_dataset: PTBXL-NORM
+      batch_size: 256
+      epochs: 500
+      learning_rate: 1.*1e-4
+      reuse_params:
+        - downsample
+        - max_duration
+        - freq
+        - emb_dim
+        - depth
+        - heads
+        - dec_emb_dim
+        - dec_depth
+        - dec_heads
+        - mlp_ratio
+        - chunk_len
+
+    main01:
+      total_samples: 1.0*1e9 # 1.0B
+      batch_size: 512
+      eval_every: 5*1e5 #5M
+      learning_rate: 1.*1e-4
+      save_model_every: 25*1e6 #25M
+
+    prelim01:
+      batch_size: 512
+      learning_rate: 1.*1e-4
+      total_samples: 1.0*1e5 # 100k
+      eval_every: 5*1e2 #500
+      save_model_every: 5*1e2 #500
+
+  baselines:
+
+    prelim01: 
+
+generatives:
+
+  model_path:
+
+    vae:
+
+      v01: ../../outputs/experiment/path/to/model
+      
+
+    dcgan:
+
+      v01: ../../outputs/experiment/path/to/model
+
+  data:
+
+    vae:
+
+      v01: ../../outputs/experiment/path/to/model
+
+    dcgan:
+
+      v01: ../../outputs/experiment/path/to/model
+
+    sim: # temporal solution; simulator based data, NOT generative model.
+
+      v01: ../../outputs/experiment/path/to/model
+
+    diff:
+
+      # 100k / no-label
+      v01: ../../outputs/experiment/path/to/model
+
+      # 100k / with-label
+      v02: ../../outputs/experiment/path/to/model
+
+      # 1M / no-label
+      v03: ../../outputs/experiment/path/to/model
+
+      # 1M / with-label
+      v04: ../../outputs/experiment/path/to/model
+
+  gans:
+    - dcgan
+    - wgan
+
+  common:
+
+    base:
+      target_freq: 500
+      max_duration: 10
+      dataset: PTBXL-ALL
+      n_workers: 4
+      num_lead: 1
+      optimizer: adam
+      scheduler: cosine-01
+      mask_ratio: 0.1
+      max_shift_ratio: 0.25
+
+    main01:
+      batch_size: 256
+      learning_rate: 1.*1e-6
+      eval_every: 5.*1e5 #500k
+      save_model_every: 1.*1e6 #1M
+      total_samples: 1.*1e9 #1B
+      dump_every: 1*1e6 #1M
+
+      data_lim: null
+      val_lim: null
+
+    main02:
+      batch_size: 256
+      learning_rate: 1.*1e-6
+      eval_every: 5.*1e5 #500k
+      save_model_every: 1.*1e6 #1M
+      total_samples: 1*1e8 #100M
+      dump_every: 1*1e6 #1M
+
+      data_lim: null
+      val_lim: null
+
+    main03:
+      batch_size: 256
+      learning_rate: 1.*1e-4
+      eval_every: 5.*1e5 #500k
+      save_model_every: 1.*1e6 #1M
+      total_samples: 2.5*1e7 #10M
+      dump_every: 1*1e6 #1M
+
+      data_lim: null
+      val_lim: null
+
+    main04:
+      batch_size: 256
+      learning_rate: 1.*1e-5
+      eval_every: 5.*1e5 #500k
+      save_model_every: 1.*1e6 #1M
+      total_samples: 1.*1e9 #1B
+      dump_every: 1*1e6 #1M
+
+      data_lim: null
+      val_lim: null
+
+split:
+
+  test:
+    seed: 123
+    size: 0.2
+
+  train_val:
+    seeds:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+    size: 0.2
+    
+# settings for data prep.
+settings:
+  
+  common:
+    syncfg_root: resources
+    save_root: ../../../raw_data
+
+    duration: 10
+    target_freq: 500
+    val_size: 0.1
+
+    max_process_time: 5
+    n_syn: 
+      clf:
+        115_000 # 100_000 + a for training set.
+      pt:
+        # 230_000 # 200_000 + a for training set.
+        1_000 # for testing.
+
+  g12ec:
+
+    src: ../../raw_data/G12EC
+
+    dx_to_code:
+
+      NormalSinus: 426783006
+      Afib: 164889003
+      VPB: 17338001
+
+      LVH: 164873001
+      IRBBB: 713426002
+      IAVB: 270492004
+      PAC: 284470004
+      RBBB: 59118001     
+
+      ALL: 0
+    
+    lead_idx: 1
+
+  cpsc:
+
+    src: ../../raw_data/CPSC2018
+
+    reference: TrainingSet3/REFERENCE.csv
+
+    dx_to_index: # After shifting label with -1.
+      NORM: 0
+      AF: 1 # originally 2
+      IAVB: 2 # originally 3
+      LBBB: 3 # originally 4
+      RBBB: 4 # originally 5
+      PAC: 5 # originally 6
+      PVC: 6 # originally 7
+      STD: 7 # originally 8
+      STE: 8 # originally 9
+
+    lead_idx: 1
+
+  ptbxl:
+
+    src: ../../raw_data/PTBXL/1.0.1/ptbxl/records500
+
+    lead_idx: 1
+
+  syn_ecg:
+
+    syncfg: syn_ecg-04
+
+
+ssl:
+
+  pretrain:
+
+    # Used for all ssl methods.
+    common:
+
+      # Shared across all ssl setting for all models.
+      base:
+        num_lead: 1
+        target_task: null
+        target_freq: 500
+        max_duration: 10
+  
+        n_workers: 4
+        scale_type: per_sample
+        batch_size: 512
+
+        # Optimizer related.
+        optimizer: adam
+        optimizier_patience: 5
+        scheduler: cosine-01
+
+        # Augmentation params.
+        aug_mask_ratio: 0.5
+        max_shift_ratio: 0.5
+        # flip_rate: 0.05
+        # scale_ratio: 0.1
+
+        # arch
+        backbone_out_dim: 64
+        emb_dim: 128
+
+
+
+      pt_ptbxl01:
+        dataset: PTBXL-ALL
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 5.*1e6 #5M
+        total_samples: 1.*1e9 #1B
+        dump_every: 5*1e6 #5M
+
+        data_lim: null
+        val_lim: null
+
+      pt_syn01:
+        dataset: syn_ecg-04
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 1.*1e6 #1M
+        total_samples: 1.*1e9 #1B
+        dump_every: 1*1e6 #1M
+
+        data_lim: 1000000 # 1M
+        val_lim: 5000 # 5k
+
+      pt_syn02: 
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 1.*1e6 #1M
+        total_samples: 1.*1e9 #1B
+        dump_every: 1*1e6 #1M
+
+        val_lim: 5000 # 5k
+
+
+      pt_vae01:
+        dataset: gen-vae/v01
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 1.*1e6 #1M
+        total_samples: 1.*1e9 #1B
+        dump_every: 1*1e6 #1M
+
+        data_lim: 1000000 # 1M
+        val_lim: 5000 # 5k
+
+
+      pt_gan01:
+        dataset: gen-dcgan/v01
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 1.*1e6 #1M
+        total_samples: 1.*1e9 #1B
+        dump_every: 1*1e6 #1M
+
+        data_lim: 1000000 # 1M
+        val_lim: 5000 # 5k
+
+      pt_sim01:
+        dataset: gen-sim/v01
+        batch_size: 512
+        learning_rate: 1.*1e-4
+        eval_every: 1.*1e6 #1M
+        save_model_every: 1.*1e6 #1M
+        total_samples: 1.*1e9 #1B
+        dump_every: 1*1e6 #1M
+
+        data_lim: 1000000 # 1M
+        val_lim: 5000 # 5k
+
+    # Used for MAE method.
+    mae:
+
+      # Used for all architectures when pretrained with MAE method.
+      all_arch:
+
+        base: 
+
+          mae_mask_ratio: 0.75
+
+      transformer:
+
+        base:
+
+          emb_dim: 128
+          depth: 10
+          heads: 8
+          mlp_ratio: 4.
+
+          dec_emb_dim: 128
+          dec_depth: 2
+          dec_heads: 16
+          chunk_len: 50
+
+
+  eval_pt_model:
+
+    fixed_setting:
+      seed: 
+        grid: 6
+        hps: 6
+        multiseed: 
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+      result_cols:
+        - score
+        - auroc
+        - auprc
+        - recall
+        - precision
+        - loss
+        - confusion_matrix
+
+      result_cols_12lead:
+        - score
+        - macro_auc
+        - fmax
+        - loss
+
+      ssl_params:
+        mae: 
+          token_selection: cls
+          out_dim_key: emb_dim
+        dino:
+          token_selection: null
+          out_dim_key: projection_dim
+        ibot:
+          token_selection: null
+          out_dim_key: projection_dim
+        byol:
+          token_selection: cls
+          out_dim_key: emb_dim
+        simclr:
+          token_selection: cls
+          out_dim_key: projection_dim
+      dataset_comb:
+        ptbxl:
+          af:
+            pos: PTBXL-AFIB
+            neg: PTBXL-NORM
+          pvc:
+            pos: PTBXL-PVC
+            neg: PTBXL-NORM
+          asmi:
+            pos: PTBXL-ASMI
+            neg: PTBXL-NORM
+          abqrs:
+            pos: PTBXL-ABQRS
+            neg: PTBXL-NORM
+          crbbb:
+            pos: PTBXL-CRBBB
+            neg: PTBXL-NORM
+          imi:
+            pos: PTBXL-IMI
+            neg: PTBXL-NORM
+          irbbb:
+            pos: PTBXL-IRBBB
+            neg: PTBXL-NORM
+          isc:
+            pos: PTBXL-ISC_
+            neg: PTBXL-NORM
+          lafb:
+            pos: PTBXL-LAFB
+            neg: PTBXL-NORM          
+          lvh:
+            pos: PTBXL-LVH
+            neg: PTBXL-NORM
+          pac:
+            pos: PTBXL-PAC
+            neg: PTBXL-NORM
+          std:
+            pos: PTBXL-STD_
+            neg: PTBXL-NORM
+          1avb:
+            pos: PTBXL-1AVB
+            neg: PTBXL-NORM
+
+        g12ec:
+          af:
+            pos: G12EC-Afib
+            neg: G12EC-NormalSinus
+          pvc:
+            pos: G12EC-VPB
+            neg: G12EC-NormalSinus
+          lvh:
+            pos: G12EC-LVH
+            neg: G12EC-NormalSinus
+          irbbb:
+            pos: G12EC-IRBBB
+            neg: G12EC-NormalSinus
+          iavb:
+            pos: G12EC-IAVB
+            neg: G12EC-NormalSinus
+          pac:
+            pos: G12EC-PAC
+            neg: G12EC-NormalSinus
+          rbbb:
+            pos: G12EC-RBBB
+            neg: G12EC-NormalSinus
+        cpsc:
+          af:
+            pos: CPSC-AF
+            neg: CPSC-NORM
+          iavb:
+            pos: CPSC-IAVB
+            neg: CPSC-NORM
+          pac:
+            pos: CPSC-PAC
+            neg: CPSC-NORM
+          pvc:
+            pos: CPSC-PVC
+            neg: CPSC-NORM
+          std:
+            pos: CPSC-STD
+            neg: CPSC-NORM
+          rbbb:
+            pos: CPSC-RBBB
+            neg: CPSC-NORM
+
+      extra_pt_model:
+        pt-extra01: ../../outputs/experiment/v240206/mae-pt20s/pt2001
+
+    params:
+      base: 
+        n_workers: 4
+        num_lead: 1
+        class_weight: null #balanced
+
+        optimizer: adam
+
+        freq: 500
+        downsample: 1
+        max_duration: 10
+
+        clf_mode: dnn
+        clf_fc_dim: 128
+
+        batch_size: 256
+
+      trial01:
+        epochs: 2
+        eval_every: 2
+        patience: 1
+
+      main01:
+        epochs: 500
+        eval_every: 5
+        patience: 5
+
+      prelim01:
+        epochs: 2
+        eval_every: 1
+        patience: 1      
+
+    mae:
+      reuse_params:
+        - max_len
+        - emb_dim
+        - depth
+        - heads
+        - dec_emb_dim
+        - dec_depth
+        - dec_heads
+        - mlp_ratio
+        - chunk_len  
+        
+        - use_cls_token
+        - add_pos_embed
+
