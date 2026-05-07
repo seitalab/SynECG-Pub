@@ -1,14 +1,61 @@
 {
-  "@context": [
-    "https://schema.org/",
-    "https://w3id.org/mlcroissant/1.0"
-  ],
-  "@type": "ml:Dataset",
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
   "name": "SimECG-N",
   "description": "SimECG-N is a synthetic 1-D ECG corpus generated in this repository with a physiologically inspired simulator. The dataset contains only signal arrays (single-lead, 10-second windows) and no identifiable patient-derived metadata.",
   "version": "TODO: add release tag",
+  "datePublished": "2026-05-07",
+  "citeAs": "TODO: add bibtex citation",
   "license": "TODO: add public data license",
-  "homepage": "DATA_CARD_SimECG-N.md",
+  "url": "DATA_CARD_SimECG-N.md",
   "keywords": [
     "ECG",
     "synthetic",
@@ -19,108 +66,206 @@
   "dateCreated": "2026-05-07",
   "distribution": [
     {
-      "@type": "ml:FileObject",
+      "@id": "simecg_n_manifest",
+      "@type": "cr:FileObject",
       "name": "simecg_n_manifest",
       "description": "Per-file manifest for the SimECG-N corpus subset files.",
       "contentUrl": "data/manifest_simecg_n.csv",
-      "encodingFormat": "text/csv"
+      "encodingFormat": "text/csv",
+      "md5": "TODO: add md5"
     },
     {
-      "@type": "ml:FileObject",
+      "@id": "simecg_n_train_split",
+      "@type": "cr:FileObject",
       "name": "simecg_n_train_split",
       "description": "Generated train split generated from one run of the SimECG-N pipeline.",
       "contentUrl": "syn_ecg-04/train_seed0007.pkl",
-      "encodingFormat": "application/x-pickle"
+      "encodingFormat": "application/x-pickle",
+      "md5": "TODO: add md5"
     },
     {
-      "@type": "ml:FileObject",
+      "@id": "simecg_n_val_split",
+      "@type": "cr:FileObject",
       "name": "simecg_n_val_split",
       "description": "Generated validation split generated from one run of the SimECG-N pipeline.",
       "contentUrl": "syn_ecg-04/val_seed0007.pkl",
-      "encodingFormat": "application/x-pickle"
+      "encodingFormat": "application/x-pickle",
+      "md5": "TODO: add md5"
     }
   ],
   "recordSet": [
     {
-      "@type": "ml:RecordSet",
+      "@type": "cr:RecordSet",
       "name": "simecg_n_file_records",
       "description": "One record per stored waveform file.",
-      "schema": {
-        "@type": "ml:Schema",
-        "fields": [
-          {
-            "@type": "ml:Field",
-            "name": "file_path",
-            "description": "Relative location of each file inside the dataset archive.",
-            "dataType": "Text"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "subset",
-            "description": "Split identity for supervised usage.",
-            "dataType": "Text"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "seed",
-            "description": "Random seed used for synthetic generation.",
-            "dataType": "Integer"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "syn_mode",
-            "description": "Scenario mode used by the generator (pt or clf).",
-            "dataType": "Text"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "syncfg",
-            "description": "Parameter-set identifier under src/prep/SimECG-N/resources.",
-            "dataType": "Text"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "record_count_expected",
-            "description": "Expected number of waveforms in this file.",
-            "dataType": "Integer"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "record_count_actual",
-            "description": "Observed number of waveforms after generation; TODO before final release.",
-            "dataType": "Text"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "sampling_rate_hz",
-            "description": "Sampling frequency used when generating each waveform.",
-            "dataType": "Integer"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "duration_sec",
-            "description": "Target waveform duration in seconds.",
-            "dataType": "Integer"
-          },
-          {
-            "@type": "ml:Field",
-            "name": "n_leads",
-            "description": "Number of signal channels per waveform.",
-            "dataType": "Integer"
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "file_path",
+          "description": "Relative location of each file inside the dataset archive.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "file_path"
+            }
           }
-        ]
-      },
-      "source": {
-        "@type": "ml:FileObject",
-        "fileSet": {
-          "@type": "ml:FileSet",
-          "filePatterns": [
-            "data/manifest_simecg_n.csv"
-          ]
+        },
+        {
+          "@type": "cr:Field",
+          "name": "subset",
+          "description": "Split identity for supervised usage.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "subset"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "seed",
+          "description": "Random seed used for synthetic generation.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "seed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "syn_mode",
+          "description": "Scenario mode used by the generator (pt or clf).",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "syn_mode"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "syncfg",
+          "description": "Parameter-set identifier under src/prep/SimECG-N/resources.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "syncfg"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "record_count_expected",
+          "description": "Expected number of waveforms in this file.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "record_count_expected"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "record_count_actual",
+          "description": "Observed number of waveforms after generation; TODO before final release.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "record_count_actual"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "sampling_rate_hz",
+          "description": "Sampling frequency used when generating each waveform.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "sampling_rate_hz"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "duration_sec",
+          "description": "Target waveform duration in seconds.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "duration_sec"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "name": "n_leads",
+          "description": "Number of signal channels per waveform.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "simecg_n_manifest"
+            },
+            "extract": {
+              "column": "n_leads"
+            }
+          }
         }
-      }
+      ]
     }
   ],
+  "rai:dataCollection": "Synthetic ECG waveform archive for non-clinical research.",
+  "rai:dataUseCases": [
+    "Pretraining and benchmarking ECG SSL models.",
+    "Method comparison for generative ECG signal pipelines."
+  ],
+  "rai:dataLimitations": [
+    "Synthetic signals are generated from parametric priors and augmentations, not measured physiology.",
+    "Generator outputs may underrepresent rare morphologies and demographic subgroup differences.",
+    "Temporal dynamics may drift relative to specific hospital/device acquisition settings."
+  ],
+  "rai:dataBiases": [
+    "Potential over-representation of normal-to-mild-abnormal morphology in default settings.",
+    "Limited evaluation coverage for uncommon rhythm patterns and artifact-heavy recordings."
+  ],
+  "rai:personalSensitiveInformation": [
+    "false: synthetic data only"
+  ],
+  "rai:dataSocialImpact": "Supports safe synthetic-data experimentation and avoids redistributing raw ECG records.",
+  "rai:dataCollectionType": [
+    "one-row-per-file synthetic ECG archive"
+  ],
+  "rai:dataImputationProtocol": "TODO: include missing-value protocol if applicable.",
+  "rai:dataCollectionMissingData": "TODO: include missing-data policy if applicable.",
+  "rai:dataCollectionRawData": "No real ECG data are redistributed.",
   "responsibleAI": {
     "intendedUse": [
       "Pretraining and benchmarking ECG SSL models.",
