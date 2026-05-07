@@ -94,10 +94,37 @@ The script validates the expected raw-data files after each step and reports mis
 2. Prepare public data
 3. Preprocess SimECG-N and SimECG-M
    1. bash scripts/prepare_simecg-n.sh
-   2. 
+   2. For SimECG-N specifically, run:
+      - `cd src/prep/SimECG-N`
+      - `python gen_ecg.py`
 4. (If needed) Train and generate data in `src/dgms`, `src/diff_sssd`
 5. Pretrain SSL backbone in `src/ssl_pt`
 6. Run downstream evaluation tasks in `src/ssl_clf`
+
+## NeurIPS 2026 Evaluations & Datasets assets
+
+The repository introduces one new dataset asset for submission:
+- SimECG-N synthetic ECG corpus: `data/manifest_simecg_n.csv`
+- Croissant metadata: `metadata/simecg_n_croissant.json`
+- Data card: `DATA_CARD_SimECG-N.md`
+- Code license file: `LICENSE`
+- SimECG-N corpus data license file: `LICENSE_DATA`
+
+Reproduction commands for SimECG-N:
+- `bash scripts/prepare_simecg-n.sh`
+- Or run from module directory:
+  - `cd src/prep/SimECG-N`
+  - `python gen_ecg.py`
+
+By default, `src/prep/SimECG-N/gen_ecg.py` uses:
+- seed `7`
+- `syn_mode = "pt"`
+- `cfg` setting `settings.syn_ecg.syncfg = "syn_ecg-04"`
+- `cfg` setting `settings.common.n_syn.pt = 1_000`
+- `cfg` setting `settings.common.val_size = 0.1`
+- `cfg` setting `settings.common.save_root = ../../../raw_data`
+
+Update `config.yaml` values only if you need a different save root or generation setting.
 
 ## Important notes
 
