@@ -9,7 +9,7 @@ This repository provides scripts for ECG preprocessing, SSL/DGM model training, 
   - `src/prep/SimECG-N`: Python-based 1D ECG simulator and data export
   - `src/prep/SimECG-M`: simulator binary wrapper (`ecgsyn`) and conversion to pickles
 - SSL pretraining and transfer learning
-  - `src/ssl_pt`: SSL pretraining (MAE, DINO, SimCLR, etc.) entry points and YAML builders
+  - `src/ssl_pt`: SSL pretraining (MAE) entry points and YAML builders
   - `src/ssl_clf`: classifier experiments and SSL-weight transfer workflows
 - Generative baselines
   - `src/dgms`: GAN/VAE/DDPM training and generation
@@ -62,7 +62,7 @@ The following `config.yaml` entries are environment-dependent by default and sho
 
 Recommended local layout:
 - PTB-XL: `raw_data/PTBXL/1.0.1/ptbxl`
-- G12EC: `raw_data/G12EC/WFDB_v230901`
+- G12EC: `raw_data/G12EC/WFDB`
 - CPSC2018: `raw_data/CPSC2018`
 
 Minimal required file layout:
