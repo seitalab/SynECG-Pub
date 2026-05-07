@@ -1,0 +1,19 @@
+# SSSD-ECG Requirements
+
+# Core dependencies
+torch>=1.10.0
+numpy>=1.20.0
+einops>=0.4.0
+opt_einsum>=3.3.0
+
+# Optional dependencies for training
+tqdm>=4.60.0
+tensorboard>=2.8.0
+
+# Optional dependencies for data processing
+scipy>=1.7.0
+matplotlib>=3.3.0
+
+# For PTB-XL dataset processing (if needed)
+pandas>=1.3.0
+wfdb>=3.4.0

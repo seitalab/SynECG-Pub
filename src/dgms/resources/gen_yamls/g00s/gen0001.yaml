@@ -1,0 +1,17 @@
+
+weight_file_key:
+  param_type: fixed
+  param_val: vae/v01
+
+n_total_samples_train:
+  param_type: fixed
+  param_val: 1100000
+
+n_total_samples_val:
+  param_type: fixed
+  param_val: 110000
+
+n_per_file:
+  param_type: fixed
+  param_val: 50000
+  # param_val: 10000

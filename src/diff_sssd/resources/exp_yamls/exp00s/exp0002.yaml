@@ -1,0 +1,47 @@
+cfg_file:
+  param_type: fixed
+  param_val: ./sssd_standalone/config/config_SSSD_ECG.json
+
+dataset:
+  param_type: fixed
+  param_val: self_split
+
+gen_method:
+  param_type: fixed
+  param_val: sssd
+
+exp_setting_key:
+  param_type: fixed
+  param_val: null
+
+data_lim:
+  param_type: fixed
+  param_val: null
+
+val_data_lim:
+  param_type: fixed
+  param_val: null
+
+learning_rate:  
+  param_type: fixed
+  param_val: 0.0002
+
+optimizer:
+  param_type: fixed
+  param_val: adam
+
+batch_size:
+  param_type: fixed
+  param_val: 8
+
+n_workers:
+  param_type: fixed
+  param_val: 15
+
+n_iters:
+  param_type: fixed
+  param_val: 100000
+
+iters_per_ckpt:
+  param_type: fixed
+  param_val: 4000

@@ -1,0 +1,32 @@
+
+exp_setting_key:
+  param_type: fixed
+  param_val: main02
+
+dgm:
+  param_type: fixed
+  param_val: vae
+
+encoder:
+  param_type: fixed
+  param_val: linear_chunk_enc
+
+decoder:
+  param_type: fixed
+  param_val: resnet_dec
+
+initial_beta:
+  param_type: fixed
+  param_val: 0.001
+
+final_beta:
+  param_type: fixed
+  param_val: 1
+
+z_dim:
+  param_type: fixed
+  param_val: 128
+
+enc_out_dim:
+  param_type: fixed
+  param_val: 512

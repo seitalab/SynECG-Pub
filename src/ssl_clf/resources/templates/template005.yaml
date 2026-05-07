@@ -1,0 +1,42 @@
+# For hyper parameter search -> multiseed classification.
+
+eval_demographics: 
+  param_type: fixed
+  param_val: True
+
+# General
+param_key:
+  param_type: fixed
+  param_val: main01
+
+
+debug:
+  param_type: fixed
+  param_val: False
+
+# Finetuning-setting.
+finetune_target:
+  param_type: fixed
+  param_val: <VAL01>
+freeze:
+  param_type: fixed
+  param_val: False
+
+# Dataset
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+target_dx: 
+  param_type: fixed
+  param_val: <VAL03>
+data_lim:
+  param_type: fixed
+  param_val: null
+val_lim:
+  param_type: fixed
+  param_val: null
+
+# Target model.
+trained_model_root:
+  param_type: fixed
+  param_val: <VAL04>

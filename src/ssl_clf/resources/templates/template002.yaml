@@ -1,0 +1,38 @@
+# For multiseed classification.
+# Load hyperparameter search results from a `hps_result` key.
+# Not necessary, after bug fix (250326) only for exp 1-104.
+
+# General
+param_key:
+  param_type: fixed
+  param_val: main01
+
+# Finetuning-setting.
+finetune_target:
+  param_type: fixed
+  param_val: <VAL01>
+freeze:
+  param_type: fixed
+  param_val: False
+
+# HPS result.
+hps_result:
+  param_type: fixed
+  param_val: <VAL04>
+load_params:
+  param_type: fixed
+  param_val: all-searched
+
+# Dataset
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+target_dx: 
+  param_type: fixed
+  param_val: <VAL03>
+data_lim:
+  param_type: fixed
+  param_val: null
+val_lim:
+  param_type: fixed
+  param_val: null

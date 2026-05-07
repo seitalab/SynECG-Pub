@@ -1,0 +1,19 @@
+# General
+architecture:
+  param_type: fixed
+  param_val: transformer
+exp_setting_key:
+  param_type: fixed
+  param_val: <VAL02>
+dataset:
+  param_type: fixed
+  param_val: <VAL04>
+ssl:
+  param_type: fixed
+  param_val: <VAL01>
+pretrained_weight_key:
+  param_type: fixed
+  param_val: null
+data_lim:
+  param_type: fixed
+  param_val: <VAL03>

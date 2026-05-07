@@ -1,0 +1,58 @@
+# General
+architecture:
+  param_type: fixed
+  param_val: luna
+exp_setting_key:
+  param_type: fixed
+  param_val: <VAL02>
+dataset:
+  param_type: fixed
+  param_val: <VAL01>
+ssl:
+  param_type: fixed
+  param_val: mae
+pretrained_weight_key:
+  param_type: fixed
+  param_val: null
+data_lim:
+  param_type: fixed
+  param_val: <VAL03>
+
+chunk_len:
+  param_type: fixed
+  param_val: 50
+
+emb_dim:
+  param_type: fixed
+  param_val: 128
+depth:
+  param_type: fixed
+  param_val: 10
+heads:
+  param_type: fixed
+  param_val: 8
+pheads:
+  param_type: fixed
+  param_val: 8
+context_length:
+  param_type: fixed
+  param_val: 32
+mlp_ratio:
+  param_type: fixed
+  param_val: 4.0
+
+dec_emb_dim:
+  param_type: fixed
+  param_val: 128
+dec_depth:
+  param_type: fixed
+  param_val: 2  
+dec_heads:
+  param_type: fixed
+  param_val: 16
+dec_pheads:
+  param_type: fixed
+  param_val: 16
+dec_context_length:
+  param_type: fixed
+  param_val: 32

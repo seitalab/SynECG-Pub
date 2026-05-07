@@ -1,0 +1,55 @@
+cfg_path:
+  param_type: fixed
+  param_val: ./sssd_standalone/config/config_SSSD_ECG.json
+
+ckpt_path:
+  param_type: fixed
+  param_val: ../../outputs/experiment/v250312/diff-exp00s/exp0002/260327-140531/multirun/train/seed0001/260327-140541-syn_ecg-DGXH100/net.pth
+
+output_root:
+  param_type: fixed
+  param_val: ../../outputs/experiment/v260327/diff-gen00s/gen0001
+
+append_timestamp:
+  param_type: fixed
+  param_val: true
+
+n_gen_train:
+  param_type: fixed
+  param_val: 5000
+
+n_gen_val:
+  param_type: fixed
+  param_val: 2000
+
+n_per_file:
+  param_type: fixed
+  param_val: 500000
+
+batch_size:
+  param_type: fixed
+  param_val: 256
+
+mode:
+  param_type: fixed
+  param_val: normal
+
+amp_dtype:
+  param_type: fixed
+  param_val: fp16
+
+compile:
+  param_type: fixed
+  param_val: false
+
+seed:
+  param_type: fixed
+  param_val: 8
+
+labels_train_path:
+  param_type: fixed
+  param_val: null
+
+labels_val_path:
+  param_type: fixed
+  param_val: null

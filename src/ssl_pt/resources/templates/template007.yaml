@@ -1,0 +1,30 @@
+# General
+architecture:
+  param_type: fixed
+  param_val: <VAL04>
+exp_setting_key:
+  param_type: fixed
+  param_val: <VAL01>
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+ssl:
+  param_type: fixed
+  param_val: mae
+pretrained_weight_key:
+  param_type: fixed
+  param_val: null
+data_lim:
+  param_type: fixed
+  param_val: <VAL03>
+
+# ECG noise augmentation (optional)
+use_ecg_noise_aug:
+  param_type: fixed
+  param_val: true
+ecg_noise_mode:
+  param_type: fixed
+  param_val: combined
+ecg_noise_seed:
+  param_type: fixed
+  param_val: null

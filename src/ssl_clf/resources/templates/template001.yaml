@@ -1,0 +1,77 @@
+# For hyper parameter search -> multiseed classification.
+
+# General
+param_key:
+  param_type: fixed
+  param_val: main01
+
+debug:
+  # Does not affect the output 
+  # Raise error and stop the program 
+  # during hyperparameter search, if True.
+  param_type: fixed
+  param_val: True 
+
+# Finetuning-setting.
+finetune_target:
+  param_type: fixed
+  param_val: <VAL01>
+freeze:
+  param_type: fixed
+  param_val: False
+
+# Dataset
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+target_dx: 
+  param_type: fixed
+  param_val: <VAL03>
+data_lim:
+  param_type: fixed
+  param_val: null
+val_lim:
+  param_type: fixed
+  param_val: null
+
+# Hyperparameter Search
+num_trials:
+  param_type: fixed
+  param_val: 10000
+max_time:
+  param_type: fixed
+  param_val: 21600
+hps_epochs:
+  param_type: fixed
+  param_val: 250
+
+# Training settings
+learning_rate: 
+  param_type: hps
+  param_val: 
+    - log_uniform
+    - 0.000005
+    - 0.005000
+
+# Data preprocessing
+mask_ratio:
+  param_type: hps
+  param_val: 
+    - uniform
+    - 0
+    - 0.500000
+max_shift_ratio:
+  param_type: hps
+  param_val: 
+    - uniform
+    - 0
+    - 0.750000
+
+# Network
+backbone_out_dim: 
+  param_type: hps
+  param_val: 
+    - int_pow
+    - 4
+    - 10
+    - 2

@@ -1,0 +1,35 @@
+# RNN-MAE
+architecture:
+  param_type: fixed
+  param_val: <VAL04>
+exp_setting_key:
+  param_type: fixed
+  param_val: <VAL01>
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+ssl:
+  param_type: fixed
+  param_val: mae
+pretrained_weight_key:
+  param_type: fixed
+  param_val: null
+data_lim:
+  param_type: fixed
+  param_val: <VAL03>
+
+chunk_len:
+  param_type: fixed
+  param_val: 50
+emb_dim:
+  param_type: fixed
+  param_val: 256
+depth:
+  param_type: fixed
+  param_val: 4
+dec_emb_dim:
+  param_type: fixed
+  param_val: 128
+dec_depth:
+  param_type: fixed
+  param_val: 2

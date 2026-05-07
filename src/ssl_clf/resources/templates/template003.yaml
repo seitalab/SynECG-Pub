@@ -1,0 +1,41 @@
+# For hyper parameter search -> multiseed classification.
+
+# General
+param_key:
+  param_type: fixed
+  param_val: main01
+
+debug:
+  param_type: fixed
+  param_val: False
+
+# Finetuning-setting.
+finetune_target:
+  param_type: fixed
+  param_val: <VAL01>
+freeze:
+  param_type: fixed
+  param_val: False
+
+# Dataset
+dataset:
+  param_type: fixed
+  param_val: <VAL02>
+target_dx: 
+  param_type: fixed
+  param_val: <VAL03>
+data_lim:
+  param_type: fixed
+  param_val: null
+val_lim:
+  param_type: fixed
+  param_val: null
+
+# HPS result.
+hps_result:
+  param_type: fixed
+  param_val: <VAL04>
+load_params:
+  param_type: fixed
+  param_val: all-searched
+
